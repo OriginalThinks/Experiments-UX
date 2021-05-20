@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Interactive Card GSAP</title>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+	<div class="card" id="card">
+		<h1>Interactive Card with GSAP</h1>
+		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae provident, quam magni illo ad rem
+			tempore, architecto placeat nesciunt doloribus aspernatur dolore ratione, quaerat consectetur repellat
+			distinctio perferendis voluptatem?</p>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"
+		integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/CSSRulePlugin.min.js"
+		integrity="sha512-0bzaetZStCnsUgbCtGVxftzF/L32PNOnrMlYLXwBOKl8cUjTSSDfJVyyJsNwGoI0iE0WUqni2eEfO35kJjFj5g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		const $card = document.getElementById('card'),
+			rule = CSSRulePlugin.getRule(".card::before"),
+			rule2 = CSSRulePlugin.getRule(".card::after"),
+			tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+
+		tl.to(rule, {
+			width: '100%'
+		})
+
+		tl.to(rule2, {
+			width: '100%'
+		}, "-=.3")
+
+		tl.to('h1', {
+			color: "white"
+		}, "-=.7")
+
+		tl.to('p', {
+			'clipPath': ' circle(140% at 0% 100%) ',
+			'transform': ' translateX(0)',
+			ease: Back.easeOut.config(4),
+			duration: 1
+		}, "-=.3"),
+
+			tl.pause();
+
+		card.addEventListener('mouseenter', () => {
+			tl.play();
+		})
+
+		card.addEventListener('mouseleave', () => {
+			tl.reverse();
+		})
+
+
+
+	</script>
+</body>
+
+</html>
